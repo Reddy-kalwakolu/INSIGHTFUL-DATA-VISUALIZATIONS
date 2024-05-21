@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insightful Data Visualizations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+        header, footer {
+            background: linear-gradient(135deg, #2c3e50, #4b79a1);
+            color: #ecf0f1;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: 700;
+            animation: fadeInDown 2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.2em;
+            font-weight: 300;
+            animation: fadeInDown 2s;
+        }
+        .created-by {
+            margin: 10px 0;
+            font-size: 1em;
+            font-weight: 300;
+            color: #ecf0f1;
+            animation: fadeInDown 2s;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1em;
+            animation: fadeInUp 2s;
+        }
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            width: 90%;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 12px;
+            margin: 20px auto;
+            text-align: center;
+            animation: fadeIn 2s;
+        }
+        .description {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #555;
+            animation: fadeIn 2s;
+        }
+        h2 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            animation: fadeIn 2s;
+        }
+        .iframe-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #333;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s;
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+        .social-media {
+            margin: 20px 0;
+        }
+        .social-media a {
+            margin: 0 10px;
+            color: #2980b9;
+            text-decoration: none;
+            font-size: 2em;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .social-media a:hover {
+            color: #2c3e50;
+            transform: scale(1.2);
+        }
+        .contact-me {
+            margin-top: 40px;
+        }
+        .contact-me form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-me input, .contact-me textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .contact-me button {
+            background-color: #2980b9;
+            color: #fff;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .contact-me button:hover {
+            background-color: #1f6391;
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .description {
+                font-size: 1em;
+            }
+            .contact-me input, .contact-me textarea {
+                font-size: 0.9em;
+            }
+            .social-media a {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    form.reset();
+                } else {
+                    alert('Failed to send message.');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Insightful Data Visualizations</h1>
+        <p>Created by Chandra Prakash Reddy Kalwakolu</p>
+        <div class="created-by">AI/ML Engineer & Data Science Expert</div>
+    </header>
+    <div class="container">
+        <div class="description">
+            <p>Welcome to my Power BI dashboard. Below you'll find an interactive visualization of data insights. Feel free to explore and contact me for more information.</p>
+        </div>
+        <h2>Power BI Dashboard</h2>
+        <div class="iframe-container">
+            <iframe title="total_cases" src="https://app.powerbi.com/view?r=eyJrIjoiNTMwOTBhY2UtZTAwZC00YTBjLThjYmItYjQwYTMwMzBlNTU0IiwidCI6IjcwZGUxOTkyLTA3YzYtNDgwZi1hMzE4LWExYWZjYmEwMzk4MyIsImMiOjN9" allowFullScreen="true"></iframe>
+        </div>
+        <div class="social-media">
+            <a href="https://www.linkedin.com/in/chandra-prakash-reddy-kalwakolu-60a119229/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/your-profile" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/Reddy-kalwakolu" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+        <div class="contact-me">
+            <h2>Contact Me</h2>
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Chandra Prakash Reddy Kalwakolu</p>
+    </footer>
+</body>
+</html>
